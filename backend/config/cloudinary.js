@@ -30,26 +30,6 @@ if (process.env.CLOUDINARY_CLOUD_NAME) {
       };
     },
   });
-} else {
-  // Fallback: use disk storage if Cloudinary not configured
-  // Store uploads to ./uploads/products so controller can read file.path
-  const path = require('path');
-  const fs = require('fs');
-  const productsDir = path.join(__dirname, '..', 'uploads', 'products');
-  if (!fs.existsSync(productsDir)) {
-    fs.mkdirSync(productsDir, { recursive: true });
-  }
-
-  storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, productsDir);
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      const ext = file.originalname.split('.').pop();
-      cb(null, `${uniqueSuffix}.${ext}`);
-    },
-  });
 }
 
 const upload = multer({ 

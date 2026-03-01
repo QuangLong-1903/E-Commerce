@@ -263,6 +263,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Add product images (Admin)
+// @route   POST /api/products/:id/images
+// @access  Private/Admin
 const addProductImages = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
@@ -272,104 +275,22 @@ const addProductImages = asyncHandler(async (req, res) => {
   }
 
   if (!req.files || req.files.length === 0) {
-    console.error('addProductImages: no files found. Content-Type:', req.headers['content-type']);
-    console.error('addProductImages: body keys:', Object.keys(req.body));
     res.status(400);
-    throw new Error('Please upload at least one image. Ensure the request is multipart/form-data and files are sent under the field name "images".');
+    throw new Error(
+      'Please upload at least one image. Ensure files are sent under the field name "images".'
+    );
   }
 
-  const newImages = [];
-  for (let i = 0; i < req.files.length; i++) {
-    const file = req.files[i];
-
-    // If Cloudinary storage used, multer-storage-cloudinary provides `path` (url) and `filename` (public id)
-    if (file.path && file.path.includes('cloudinary')) {
-      newImages.push({
-        url: file.path || file.url || file.secure_url,
-        publicId: file.filename || file.public_id || file.publicId,
-        isMain: product.images.length === 0 && i === 0,
-      });
-      continue;
-    }
-
-    // If local disk storage used by multer
-    if (file.path && !file.path.includes('cloudinary')) {
-      // Build URL for local file
-      const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
-      const host = req.headers['x-forwarded-host'] || req.get('host') || (process.env.BACKEND_URL ? process.env.BACKEND_URL.replace(/^https?:\/\//, '') : 'localhost:5000');
-      const filename = file.filename || file.originalname;
-      const fileUrl = `${protocol}://${host}/uploads/products/${filename}`;
-
-      console.log('✅ Image uploaded (local):', { filename, url: fileUrl });
-
-      newImages.push({
-        url: fileUrl,
-        publicId: `uploads/products/${filename}`,
-        isMain: product.images.length === 0 && i === 0,
-      });
-      continue;
-    }
-
-    // If memoryStorage used (file.buffer available), need to save it manually
-    if (file.buffer && uploadBuffer && cloudinary.config && cloudinary.config().cloud_name) {
-      try {
-        const result = await uploadBuffer(file.buffer, 'ecommerce/products');
-        newImages.push({
-          url: result.secure_url || result.url,
-          publicId: result.public_id,
-          isMain: product.images.length === 0 && i === 0,
-        });
-        continue;
-      } catch (err) {
-        console.error('Error uploading buffer to Cloudinary:', err);
-      }
-    }
-
-    // Fallback: if buffer exists, save file locally to /uploads/products
-    if (file.buffer) {
-      try {
-        const fs = require('fs');
-        const path = require('path');
-        const uploadsRoot = path.join(__dirname, '..', 'uploads', 'products');
-        if (!fs.existsSync(uploadsRoot)) {
-          fs.mkdirSync(uploadsRoot, { recursive: true });
-        }
-
-        // Determine extension from mimetype
-        const ext = (file.mimetype && file.mimetype.split('/')[1]) || 'jpg';
-        const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${ext}`;
-        const filePath = path.join(uploadsRoot, filename);
-
-        fs.writeFileSync(filePath, file.buffer);
-
-        // Build URL
-        const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
-        const host = req.headers['x-forwarded-host'] || req.get('host') || (process.env.BACKEND_URL ? process.env.BACKEND_URL.replace(/^https?:\/\//, '') : 'localhost:5000');
-        const fileUrl = `${protocol}://${host}/uploads/products/${filename}`;
-
-        console.log('✅ Image uploaded (fallback):', { filename, url: fileUrl });
-
-        newImages.push({
-          url: fileUrl,
-          publicId: `uploads/products/${filename}`,
-          isMain: product.images.length === 0 && i === 0,
-        });
-        continue;
-      } catch (err) {
-        console.error('❌ Error saving buffer to local uploads:', err);
-      }
-    }
-  }
-
-  if (newImages.length === 0) {
-    res.status(400);
-    throw new Error('No valid images were uploaded or Cloudinary is not configured to accept buffer uploads.');
-  }
+  const newImages = req.files.map((file, index) => ({
+    url: file.path,              // Cloudinary URL
+    publicId: file.filename,     // Cloudinary public_id
+    isMain: product.images.length === 0 && index === 0,
+  }));
 
   product.images.push(...newImages);
   await product.save();
 
-  res.json({
+  res.status(201).json({
     success: true,
     message: 'Images uploaded successfully',
     data: { images: product.images },
