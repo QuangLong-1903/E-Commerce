@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../store/slices/orderSlice';
 import { resetCart } from '../store/slices/cartSlice';
 import toast from 'react-hot-toast';
+const API_BASE = process.env.REACT_APP_API_URL;
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
@@ -100,7 +101,7 @@ const CheckoutPage = () => {
 
       // redirect directly to server endpoint that will build & sign the VNPay URL
       dispatch(resetCart());
-      window.location.href = `${API_BASE}/api/vnpay/redirect/${orderId}`;
+      window.location.href = `${API_BASE}/api/vnpay/redirect/${orderResult._id}`;
     } catch (err) {
       console.error('VNPay error:', err);
       toast.error(err?.message || 'Lỗi khi thanh toán VNPay');
