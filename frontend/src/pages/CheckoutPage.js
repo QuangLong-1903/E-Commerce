@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from '../store/slices/orderSlice';
 import { resetCart } from '../store/slices/cartSlice';
 import toast from 'react-hot-toast';
-const API_BASE = process.env.REACT_APP_API_URL;
-
+const API_BASE =
+  process.env.REACT_APP_API_URL ||
+  "https://e-commerce-beh3.vercel.app";
 const CheckoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
