@@ -11,7 +11,7 @@ const vnp_Url = process.env.VNP_URL || 'https://sandbox.vnpayment.vn/paymentv2/v
 // return URL should point to backend endpoint so we can verify before redirecting to frontend
 const vnp_ReturnUrl = process.env.VNP_RETURNURL ||
   (process.env.BACKEND_URL && `${process.env.BACKEND_URL}/api/vnpay/vnpay_return`) ||
-  'http://e-commerce-beh3.vercel.app/api/vnpay/vnpay_return';
+  'https://e-commerce-beh3.vercel.app/api/vnpay/vnpay_return';
 
 // Validate config (do not dump the full secret to logs)
 if (!vnp_TmnCode || !vnp_HashSecret) {
