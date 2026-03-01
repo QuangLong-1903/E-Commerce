@@ -100,7 +100,7 @@ const CheckoutPage = () => {
 
       // redirect directly to server endpoint that will build & sign the VNPay URL
       dispatch(resetCart());
-      window.location.href =  `${process.env.REACT_APP_API_URL.replace('/api', '')}/api/vnpay/redirect/${orderResult._id}`;
+      window.location.href = `${API_BASE}/api/vnpay/redirect/${orderId}`;
     } catch (err) {
       console.error('VNPay error:', err);
       toast.error(err?.message || 'Lỗi khi thanh toán VNPay');
