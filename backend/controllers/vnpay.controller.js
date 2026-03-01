@@ -67,7 +67,7 @@ exports.vnpayReturn = async (req, res) => {
     });
 
     const isValid = verifyVnpayChecksum(vnp_Params, vnp_HashSecret);
-    const frontend = process.env.FRONTEND_URL || 'http://localhost:3000';
+    const frontend = process.env.FRONTEND_URL || 'https://e-commerce-flame-gamma-96.vercel.app';
 
     if (!isValid) {
       console.error('❌ Checksum verification failed!');
@@ -185,7 +185,7 @@ exports.redirectToVnpay = async (req, res) => {
 
     // If the order is already paid, skip calling VNPay and forward user to success page
     if (order.paymentStatus === 'paid') {
-      const frontend = process.env.FRONTEND_URL || 'http://localhost:3000';
+      const frontend = process.env.FRONTEND_URL || 'https://e-commerce-flame-gamma-96.vercel.app';
       return res.redirect(`${frontend}/checkout/vnpay-return?success=true&alreadyPaid=true`);
     }
     // ensure txnRef exists but do not overwrite if already set

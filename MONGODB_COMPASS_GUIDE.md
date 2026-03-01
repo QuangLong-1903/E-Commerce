@@ -218,7 +218,7 @@ db.categories.deleteMany({})
 ## 📝 Test Data Mẫu
 
 ### **Tạo User Test Qua Web**
-1. Truy cập: `http://localhost:3000/register`
+1. Truy cập: `https://e-commerce-flame-gamma-96.vercel.app/register`
 2. Nhập thông tin:
    - Name: `Test User`
    - Email: `test@example.com`
@@ -228,7 +228,7 @@ db.categories.deleteMany({})
 5. Bạn sẽ thấy user mới được tạo
 
 ### **Tạo Product Test Qua Admin**
-1. Truy cập: `http://localhost:3000/admin/products`
+1. Truy cập: `https://e-commerce-flame-gamma-96.vercel.app/admin/products`
 2. Nhấp **Add Product**
 3. Nhập thông tin sản phẩm
 4. Nhấp **Save**

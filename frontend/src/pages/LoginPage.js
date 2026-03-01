@@ -50,7 +50,7 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL || 'http://localhost:5000/api'}/auth/google`;
+    window.location.href = `${process.env.REACT_APP_API_URL || 'https://e-commerce-flame-gamma-96.vercel.app'}/auth/google`;
   };
 
   return (

@@ -331,7 +331,7 @@ const googleCallback = asyncHandler(async (req, res) => {
   await user.save();
 
   // Redirect to frontend with tokens
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+  const frontendUrl = process.env.FRONTEND_URL || 'https://e-commerce-flame-gamma-96.vercel.app';
   res.redirect(
     `${frontendUrl}/auth/google/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`
   );

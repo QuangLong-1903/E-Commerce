@@ -312,7 +312,8 @@ JWT_REFRESH_SECRET=your_refresh_secret
 JWT_REFRESH_EXPIRE=30d
 PORT=5000
 NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
+# For production, set this to your deployed frontend URL
+FRONTEND_URL=https://e-commerce-flame-gamma-96.vercel.app
 
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
@@ -338,7 +339,8 @@ npm install
 
 2. **Create .env file:**
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+# During local development keep this pointing to your local backend
+REACT_APP_API_URL=https://e-commerce-flame-gamma-96.vercel.app
 REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 

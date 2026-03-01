@@ -34,6 +34,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3002',
+  'https://e-commerce-flame-gamma-96.vercel.app',
 ];
 
 app.use(cors({

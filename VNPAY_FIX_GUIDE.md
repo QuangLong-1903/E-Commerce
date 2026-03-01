@@ -14,7 +14,7 @@ Các lỗi sau đây đã được sửa:
 
 ### 3. **Return URL Config**
 - ❌ Cũ: `http://localhost:5000/api/vnpay/vnpay_return` (Backend API)
-- ✅ Mới: `http://localhost:3000/checkout/vnpay-return` (Frontend)
+- ✅ Mới: `https://e-commerce-flame-gamma-96.vercel.app/checkout/vnpay-return` (Frontend)
 
 > 💡 **Flow update:** the backend now exposes a single redirect endpoint (`GET /api/vnpay/redirect/:orderId`).
 > The older `/create_payment_url` POST route has been removed to avoid duplicate flows.
@@ -41,8 +41,8 @@ Các lỗi sau đây đã được sửa:
 VNP_TMNCODE=AY0K3A0W           # Terminal ID / Mã Website (provided)
 VNP_HASHSECRET=ZKIYRPH7JCQXJ4F40ASJ9K1B3HDIA94Q  # Secret Key
 VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
-VNP_RETURNURL=http://localhost:3000/checkout/vnpay-return
-FRONTEND_URL=http://localhost:3000
+VNP_RETURNURL=https://e-commerce-flame-gamma-96.vercel.app/checkout/vnpay-return
+FRONTEND_URL=https://e-commerce-flame-gamma-96.vercel.app
 ```
 
 ### Bước 2: Start Servers
@@ -143,8 +143,8 @@ Khi deploy lên production:
    ```env
    # Thay đổi:
    VNP_URL=https://api.vnpayment.vn/paymentv2/vpcpay.html
-   VNP_RETURNURL=https://yourdomain.com/checkout/vnpay-return
-   FRONTEND_URL=https://yourdomain.com
+   VNP_RETURNURL=https://e-commerce-flame-gamma-96.vercel.app/checkout/vnpay-return
+   FRONTEND_URL=https://e-commerce-flame-gamma-96.vercel.app
    ```
 
 2. **Register with VNPay**

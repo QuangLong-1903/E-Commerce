@@ -24,7 +24,8 @@ JWT_REFRESH_EXPIRE=30d
 # Server
 PORT=5000
 NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
+# For production, set this to your deployed frontend URL
+FRONTEND_URL=https://e-commerce-flame-gamma-96.vercel.app
 
 # Cloudinary (get from cloudinary.com)
 CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -53,7 +54,7 @@ npm install
 
 2. **Configure environment variables** (create `.env`):
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=https://e-commerce-flame-gamma-96.vercel.app
 REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
@@ -61,20 +62,20 @@ REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
 ```bash
 npm start
 ```
-✅ Frontend running at `http://localhost:3000`
+✅ Frontend running at `https://e-commerce-flame-gamma-96.vercel.app`
 
 ## 📱 Access Points
 
 | Component | URL | Purpose |
 |-----------|-----|---------|
-| Frontend | http://localhost:3000 | User interface |
+| Frontend | https://e-commerce-flame-gamma-96.vercel.app | User interface |
 | API | http://localhost:5000/api | Backend API |
-| Home | http://localhost:3000 | Browse products |
-| Shop | http://localhost:3000/shop | Advanced search |
-| Cart | http://localhost:3000/cart | Shopping cart |
-| Checkout | http://localhost:3000/checkout | Place order |
-| Profile | http://localhost:3000/profile | User account |
-| Admin | http://localhost:3000/admin | Admin dashboard |
+| Home | https://e-commerce-flame-gamma-96.vercel.app | Browse products |
+| Shop | https://e-commerce-flame-gamma-96.vercel.app/shop | Advanced search |
+| Cart | https://e-commerce-flame-gamma-96.vercel.app/cart | Shopping cart |
+| Checkout | https://e-commerce-flame-gamma-96.vercel.app/checkout | Place order |
+| Profile | https://e-commerce-flame-gamma-96.vercel.app/profile | User account |
+| Admin | https://e-commerce-flame-gamma-96.vercel.app/admin | Admin dashboard |
 
 ## 👤 Test Credentials
 
@@ -233,7 +234,7 @@ brew services start mongodb-community
 ### Issue: CORS errors
 ```bash
 # Solution: Check FRONTEND_URL in backend .env
-# Should be: http://localhost:3000
+# Should be: https://e-commerce-flame-gamma-96.vercel.app
 ```
 
 ## 🛠️ Useful Commands
