@@ -35,14 +35,14 @@ CLOUDINARY_API_SECRET=your_api_secret
 # Google OAuth (get from Google Console)
 GOOGLE_CLIENT_ID=your_google_id
 GOOGLE_CLIENT_SECRET=your_google_secret
-GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
+GOOGLE_CALLBACK_URL=http://e-commerce-beh3.vercel.app/api/auth/google/callback
 ```
 
 3. **Start backend:**
 ```bash
 npm run dev
 ```
-✅ Backend running at `http://localhost:5000`
+✅ Backend running at `http://e-commerce-beh3.vercel.app`
 
 ### Frontend Setup
 
@@ -69,7 +69,7 @@ npm start
 | Component | URL | Purpose |
 |-----------|-----|---------|
 | Frontend | https://e-commerce-flame-gamma-96.vercel.app | User interface |
-| API | http://localhost:5000/api | Backend API |
+| API | http://e-commerce-beh3.vercel.app/api | Backend API |
 | Home | https://e-commerce-flame-gamma-96.vercel.app | Browse products |
 | Shop | https://e-commerce-flame-gamma-96.vercel.app/shop | Advanced search |
 | Cart | https://e-commerce-flame-gamma-96.vercel.app/cart | Shopping cart |
@@ -105,7 +105,7 @@ npm start
 ### 1. Authentication Flow
 ```bash
 # Register
-POST http://localhost:5000/api/auth/register
+POST http://e-commerce-beh3.vercel.app/api/auth/register
 {
   "name": "Test User",
   "email": "test@example.com",
@@ -113,7 +113,7 @@ POST http://localhost:5000/api/auth/register
 }
 
 # Login
-POST http://localhost:5000/api/auth/login
+POST http://e-commerce-beh3.vercel.app/api/auth/login
 {
   "email": "test@example.com",
   "password": "test123"
@@ -123,13 +123,13 @@ POST http://localhost:5000/api/auth/login
 ### 2. Product Management
 ```bash
 # Get all products
-GET http://localhost:5000/api/products
+GET http://e-commerce-beh3.vercel.app/api/products
 
 # Get featured products
-GET http://localhost:5000/api/products/featured
+GET http://e-commerce-beh3.vercel.app/api/products/featured
 
 # Create product (Admin only)
-POST http://localhost:5000/api/products
+POST http://e-commerce-beh3.vercel.app/api/products
 Headers: Authorization: Bearer {token}
 {
   "name": "Product Name",
@@ -143,7 +143,7 @@ Headers: Authorization: Bearer {token}
 ### 3. Cart Operations
 ```bash
 # Add to cart
-POST http://localhost:5000/api/cart/items
+POST http://e-commerce-beh3.vercel.app/api/cart/items
 Headers: Authorization: Bearer {token}
 {
   "productId": "product_id",
@@ -151,11 +151,11 @@ Headers: Authorization: Bearer {token}
 }
 
 # Get cart
-GET http://localhost:5000/api/cart
+GET http://e-commerce-beh3.vercel.app/api/cart
 Headers: Authorization: Bearer {token}
 
 # Update cart item
-PUT http://localhost:5000/api/cart/items/product_id
+PUT http://e-commerce-beh3.vercel.app/api/cart/items/product_id
 Headers: Authorization: Bearer {token}
 {
   "quantity": 2
@@ -165,7 +165,7 @@ Headers: Authorization: Bearer {token}
 ### 4. Order Creation
 ```bash
 # Create order
-POST http://localhost:5000/api/orders
+POST http://e-commerce-beh3.vercel.app/api/orders
 Headers: Authorization: Bearer {token}
 {
   "shippingAddress": {

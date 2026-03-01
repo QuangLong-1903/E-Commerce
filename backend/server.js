@@ -31,10 +31,7 @@ const app = express();
 
 // Middleware
 const allowedOrigins = [
-  process.env.FRONTEND_URL || 'http://localhost:3000',
-  'http://localhost:3001',
-  'http://localhost:3002',
-  'https://e-commerce-flame-gamma-96.vercel.app',
+  process.env.FRONTEND_URL || 'https://e-commerce-flame-gamma-96.vercel.app',
 ];
 
 app.use(cors({
@@ -92,7 +89,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📡 API available at http://localhost:${PORT}/api`);
+  const publicApi = process.env.BACKEND_URL || `http://e-commerce-beh3.vercel.app`;
+  console.log(`📡 API available at ${publicApi}/api`);
 });
 
 module.exports = app;

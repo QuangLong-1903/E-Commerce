@@ -321,7 +321,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 GOOGLE_CLIENT_ID=your_google_id
 GOOGLE_CLIENT_SECRET=your_google_secret
-GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
+GOOGLE_CALLBACK_URL=http://e-commerce-beh3.vercel.app/api/auth/google/callback
 ```
 
 3. **Run backend:**

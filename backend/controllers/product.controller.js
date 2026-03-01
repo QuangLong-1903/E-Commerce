@@ -296,7 +296,7 @@ const addProductImages = asyncHandler(async (req, res) => {
     if (file.path && !file.path.includes('cloudinary')) {
       // Build URL for local file
       const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
-      const host = req.headers['x-forwarded-host'] || req.get('host') || 'localhost:5000';
+      const host = req.headers['x-forwarded-host'] || req.get('host') || (process.env.BACKEND_URL ? process.env.BACKEND_URL.replace(/^https?:\/\//, '') : 'localhost:5000');
       const filename = file.filename || file.originalname;
       const fileUrl = `${protocol}://${host}/uploads/products/${filename}`;
 
@@ -344,7 +344,7 @@ const addProductImages = asyncHandler(async (req, res) => {
 
         // Build URL
         const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'http';
-        const host = req.headers['x-forwarded-host'] || req.get('host') || 'localhost:5000';
+        const host = req.headers['x-forwarded-host'] || req.get('host') || (process.env.BACKEND_URL ? process.env.BACKEND_URL.replace(/^https?:\/\//, '') : 'localhost:5000');
         const fileUrl = `${protocol}://${host}/uploads/products/${filename}`;
 
         console.log('✅ Image uploaded (fallback):', { filename, url: fileUrl });
