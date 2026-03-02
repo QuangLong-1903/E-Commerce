@@ -221,7 +221,7 @@ exports.redirectToVnpay = async (req, res) => {
     };
 
     const sortedParams = sortObject(vnp_Params);
-    const signDataPlain = querystring.stringify(sortedParams, { encode: false });
+    const signDataPlain = querystring.stringify(sortedParams, { encode: true });
     const hmac = crypto.createHmac('sha512', vnp_HashSecret.trim());
     const signed = hmac.update(Buffer.from(signDataPlain, 'utf-8')).digest('hex');
 
