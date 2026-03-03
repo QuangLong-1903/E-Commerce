@@ -50,7 +50,7 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_API_URL || 'http://e-commerce-beh3.vercel.app/api'}/auth/google`;
+    window.location.href = `${process.env.REACT_APP_API_URL || 'https://e-commerce-beh3.vercel.app/api'}/auth/google`;
   };
 
   return (

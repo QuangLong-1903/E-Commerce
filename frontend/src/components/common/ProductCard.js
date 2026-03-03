@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
   });
 
   const mainImage = product.images?.find((img) => img.isMain) || product.images?.[0];
-  const imageUrl = mainImage?.url || 'https://via.placeholder.com/400x400?text=No+Image';
+  const imageUrl = mainImage?.url || '/no-image.svg';
   
   const discountPercentage = product.comparePrice && product.comparePrice > product.price
     ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100)

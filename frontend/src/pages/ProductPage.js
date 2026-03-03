@@ -105,7 +105,7 @@ const ProductPage = () => {
   }
 
   const images = product.images || [];
-  const currentImage = images[selectedImage]?.url || 'https://via.placeholder.com/600x600?text=No+Image';
+  const currentImage = images[selectedImage]?.url || '/no-image.svg';
   const discountPercentage = product.comparePrice && product.comparePrice > product.price
     ? Math.round(((product.comparePrice - product.price) / product.comparePrice) * 100)
     : 0;

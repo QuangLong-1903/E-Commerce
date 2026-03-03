@@ -6,7 +6,7 @@ import { resetCart } from '../store/slices/cartSlice';
 import toast from 'react-hot-toast';
 const API_BASE =
   process.env.REACT_APP_API_URL ||
-  "https://e-commerce-beh3.vercel.app";
+  "https://e-commerce-beh3.vercel.app/api";
 const CheckoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -294,7 +294,7 @@ const CheckoutPage = () => {
                   return (
                     <div key={item._id} className="flex gap-3">
                       <img
-                        src={mainImage?.url || 'https://via.placeholder.com/60'}
+                        src={mainImage?.url || '/no-image.svg'}
                         alt={product?.name}
                         className="w-16 h-16 object-cover rounded-lg"
                       />

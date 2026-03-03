@@ -121,7 +121,7 @@ const CartPage = () => {
               {items.map((item) => {
                 const product = item.product;
                 const mainImage = product?.images?.find((img) => img.isMain) || product?.images?.[0];
-                const imageUrl = mainImage?.url || 'https://via.placeholder.com/100x100?text=No+Image';
+                const imageUrl = mainImage?.url || '/no-image.svg';
 
                 return (
                   <div key={item._id} className="p-4">
