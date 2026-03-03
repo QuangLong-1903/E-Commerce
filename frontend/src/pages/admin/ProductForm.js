@@ -127,10 +127,7 @@ const AdminProductForm = () => {
         images.forEach(file => {
           createData.append('images', file);
         });
-
-        const res = await api.post('/products', createData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
+;
         toast.success(t('adminProductForm.createdSuccess'));
       }
       
