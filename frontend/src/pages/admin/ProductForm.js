@@ -111,18 +111,26 @@ const AdminProductForm = () => {
         await api.put(`/products/${id}`, productData);
         toast.success(t('adminProductForm.updatedSuccess'));
       } else {
-        const res = await api.post('/products', productData);
-        const productId = res.data.data.product._id;
-        
-        // Upload images if any
-        if (images.length > 0) {
-          const formDataWithImages = new FormData();
-          images.forEach(file => {
-            formDataWithImages.append('images', file);
-          });
-          await api.post(`/products/${productId}/images`, formDataWithImages);
-        }
-        
+        // when creating a new product we now support uploading images in the same request
+        const createData = new FormData();
+        Object.entries(productData).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            // arrays need to be stringified
+            if (Array.isArray(value)) {
+              value.forEach(v => createData.append(key, v));
+            } else {
+              createData.append(key, value);
+            }
+          }
+        });
+        // attach image files if any
+        images.forEach(file => {
+          createData.append('images', file);
+        });
+
+        const res = await api.post('/products', createData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         toast.success(t('adminProductForm.createdSuccess'));
       }
       

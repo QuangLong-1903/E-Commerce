@@ -163,7 +163,8 @@ const createProduct = asyncHandler(async (req, res) => {
     isFeatured,
   } = req.body;
 
-  const product = await Product.create({
+  // build initial product data
+  const productData = {
     name,
     description,
     price,
@@ -175,7 +176,19 @@ const createProduct = asyncHandler(async (req, res) => {
     specifications: specifications || [],
     isFeatured: isFeatured || false,
     images: [],
-  });
+  };
+
+  // if images were uploaded during creation, attach them
+  if (req.files && req.files.length > 0) {
+    const newImages = req.files.map((file, index) => ({
+      url: file.path,           // Cloudinary URL
+      publicId: file.filename,  // Cloudinary public_id
+      isMain: index === 0,
+    }));
+    productData.images = newImages;
+  }
+
+  const product = await Product.create(productData);
 
   res.status(201).json({
     success: true,

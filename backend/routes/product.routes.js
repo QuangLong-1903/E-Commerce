@@ -37,7 +37,15 @@ router.post('/:id/reviews', protect, mongoIdValidation('id'), addProductReview);
 // Admin routes
 router.get('/admin/all', protect, admin, paginationValidation, getAllProductsAdmin);
 router.get('/admin/stats', protect, admin, getProductStats);
-router.post('/', protect, admin, productValidation, createProduct);
+// allow uploading images when creating a product (field name "images")
+router.post(
+  '/',
+  protect,
+  admin,
+  upload.array('images', 10),
+  productValidation,
+  createProduct
+);
 router.put('/:id', protect, admin, mongoIdValidation('id'), updateProduct);
 router.delete('/:id', protect, admin, mongoIdValidation('id'), deleteProduct);
 
